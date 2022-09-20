@@ -10,7 +10,6 @@ import WebKit
 
 public class UserScript : WKUserScript {
     var groupName: String?
-    @available(iOS 15.0, *)
     lazy var contentWorld: WKContentWorld = WKContentWorld.page
 
     public override init(source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool) {
@@ -22,13 +21,11 @@ public class UserScript : WKUserScript {
         self.groupName = groupName
     }
 
-    @available(iOS 15.0, *)
     public override init(source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool, in contentWorld: WKContentWorld) {
         super.init(source: source, injectionTime: injectionTime, forMainFrameOnly: forMainFrameOnly, in: contentWorld)
         self.contentWorld = contentWorld
     }
 
-    @available(iOS 15.0, *)
     public init(groupName: String?, source: String, injectionTime: WKUserScriptInjectionTime, forMainFrameOnly: Bool, in contentWorld: WKContentWorld) {
         super.init(source: source, injectionTime: injectionTime, forMainFrameOnly: forMainFrameOnly, in: contentWorld)
         self.groupName = groupName
@@ -41,7 +38,7 @@ public class UserScript : WKUserScript {
         }
         
         let contentWorldMap = map["contentWorld"] as? [String:Any?]
-        if #available(iOS 15.0, *), let contentWorldMap = contentWorldMap {
+        if #available(iOS 14.0, *), let contentWorldMap = contentWorldMap {
             let contentWorld = WKContentWorld.fromMap(map: contentWorldMap, windowId: windowId)!
             return UserScript(
                 groupName: map["groupName"] as? String,
